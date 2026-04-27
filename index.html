@@ -200,37 +200,256 @@ body{background:var(--light);font-family:'Noto Sans KR',sans-serif;min-height:10
 </div>
 
 <script>
+// ─────────────────────────────────────────
+//  ISSUES 데이터 — 최신순 정렬
+// ─────────────────────────────────────────
 const ISSUES = [
-  { vol: "2026-17", issue: "2026_4-4", date: "2026.04.27", dateSort: 20260427, weekLabel: "2026 · 4월 4주", title: "건설자재 수급 위기·신통기획 대규모 가결", summary: "중동전쟁 장기화로 아스콘·단열재 등 주요 자재 가격이 급등하며 5월 공사 중단 우려가 현실화됐다.", keywords: ["건설자재 수급위기", "신통기획", "역세권 활성화", "영동대로 지하도시", "법령 행정예고"], tags: ["국토부", "서울시", "정비사업", "시장동향"], file: "도시건축관련_주간뉴스레터_2026_4-4.html", sections: [true,true,true,true,true] },
-  { vol: "2026-16", issue: "2026_4-3", date: "2026.04.20", dateSort: 20260420, weekLabel: "2026 · 4월 3주", title: "건설사 특별융자 6천억·서울 고층공사비 급등", summary: "국토부: 중동발 건설위기 대응으로 건설사 특별융자 6,000억원 ", keywords: ["건설특별융자", "고층공사비", "신반포2차", "정비사업", "설계공모"], tags: ["국토부", "서울시", "정비사업", "시장동향"], file: "도시건축관련_주간뉴스레터_2026_4-3.html", sections: [true,true,true,true,true] },
-  { vol: "2026-15", issue: "2026_4-2", date: "2026.04.13", dateSort: 20260413, weekLabel: "2026 · 4월 2주", title: "중동발 건설자재 위기·서울 역세권 개발 가속", summary: "중폙전쟁 ҥ건설팔트·레미콘 원자재", keywords: ["건설자재", "쉭세권", "장기전세주택"], tags: ["국토부", "서울시", "시장동향"], file: "도시건축관련_주간뉴스레터_2026_4-2.html", sections: [true,true,true,true,false] },
-  { vol: "2026-14", issue: "2026_4-1", date: "2026.04.06", dateSort: 20260406, weekLabel: "2026 · 4월 1주", title: "건축법 개정 이후대� 정상화 로드맵", summary: "대한건축사협회 가올해 로드맵을 공식", keywords: ["건축사", "토허구역"], tags: ["국토부", "서울시", "정비사업", "시장동향"], file: "도시건축관련_주간뉴스레터_2026_4-1.html", sections: [true,true,true,true,true] },
-  { vol: "2026-13", issue: "2026_3-5", date: "2026.04.05", dateSort: 20260405, weekLabel: "2026 · 3월 5주", title: "토허구역 재지정�3�청 4월 톄양", summary: "압·여·목·성 토허구역 재지정 4월 ", keywords: ["토허구역", "4월 분양"], tags: ["국토부", "서울시", "정비사업", "시장동향"], file: "도시건축관련_주간뉴스레터_2026_3-5.html", sections: [true,true,true,true,true] },
-  { vol: "2026-12", issue: "2026_3-4", date: "2026.03.29", dateSort: 20260329, weekLabel: "2026 · 3월 4주", title: "2기 Ӻ자도시 공가선", summary: "국토부가 2기 GTX �L�재건축", keywords: ["2기신도시", "GTX"], tags: ["국토부", "서울시", "정비사업"], file: "도시건축관련_주간뉴스레터_2026_3-4.html", sections: [true,true,true,true,false] },
-  { vol: "2026-11", issue: "2026_3-3", date: "2026.03.22", dateSort: 20260322, weekLabel: "2026 · 3월 3주", title: "서울시 용도지역 체계 개편", summary: "서울시가 모공", keywords: ["용도지역"], tags: ["서울시"], file: "도시건축관련_주간뉴스레터_2026_3-3.html", sections: [true,true,true,false,true] },
-  { vol: "2026-10", issue: "2026_3-2", date: "2026.03.15", dateSort: 20260315, weekLabel: "2026 · 3월 2주", title: "LH 공곴주택 공급 계획", summary: "LH ��ᓙ", keywords: ["LH 공공주택"], tags: ["국토부", "서울시", "시장동향"], file: "도시건축관련_주간뉴스레터_2026_3-2.html", sections: [true,true,true,true,false] },
-  { vol: "2026-9", issue: "2026_3-1", date: "2026.03.08", dateSort: 20260308, weekLabel: "2026 · 3월 1주", title: "건축첕 시행령개정", summary: "건축첕 건축 1주", keywords: ["건축첕"], tags: ["국토부", "서울시", "정비사업"], file: "도시건축관련_주간뉴스레터_2026_3-1.html", sections: [true,true,true,false,true] },
-  { vol: "2026-8", issue: "2026_2-4", date: "2026.02.22", dateSort: 20260222, weekLabel: "2026 · 2월 4주", title: "건축사첕 국회 통과", summary: "건축사 TF", keywords: ["건축사법"], tags: ["국토부", "시장동향"], file: "도시건축관련_주간뉴스레터_2026_2-4.html", sections: [true,false,true,true,false] }
+  {
+    vol: "2026-17",
+    issue: "2026_4-4",
+    date: "2026.04.27",
+    dateSort: 20260427,
+    weekLabel: "2026 · 4월 4주",
+    title: "건설자재 수급 위기·신통기획 대규모 가결",
+    summary: "중동전쟁 장기화로 아스콘·단열재 등 주요 자재 가격이 급등하며 5월 공사 중단 우려가 현실화됐다. 서울시는 올림픽훼밀리타운 6,787가구 재건축 등 신통기획 4건을 가결하고 역세권 활성화 고시를 집중 발표했다.",
+    keywords: ["건설자재 수급위기", "신통기획", "역세권 활성화", "영동대로 지하도시", "법령 행정예고"],
+    tags: ["국토부", "서울시", "정비사업", "시장동향"],
+    file: "도시건축관련_주간뉴스레터_2026_4-4.html",
+    sections: [true, true, true, true, true]
+  },
+  {
+    vol: "2026-16",
+    issue: "2026_4-3",
+    date: "2026.04.20",
+    dateSort: 20260420,
+    weekLabel: "2026 · 4월 3주",
+    title: "건설사 특별융자 6천억·서울 고층공사비 급등",
+    summary: "국토부가 중동발 건설위기 대응으로 건설사 특별융자 6,000억원 공급을 발표했다. 서울 고층 공사비가 5년새 30% 급등한 가운데 신반포2차 재건축 통합심의 통과 등 정비사업이 속도를 냈다.",
+    keywords: ["건설특별융자", "고층공사비", "신반포2차", "정비사업", "설계공모"],
+    tags: ["국토부", "서울시", "정비사업", "시장동향"],
+    file: "도시건축관련_주간뉴스레터_2026_4-3.html",
+    sections: [true, true, true, true, true]
+  },
+  {
+    vol: "2026-15",
+    issue: "2026_4-2",
+    date: "2026.04.13",
+    dateSort: 20260413,
+    weekLabel: "2026 · 4월 2주",
+    title: "중동발 건설자재 위기·서울 역세권 개발 가속",
+    summary: "중동전쟁 장기화로 아스팔트·레미콘 원자재 공급이 위협받으며 건설공사비지수가 역대 최고치를 기록했다. 서울시는 역세권 활성화사업과 장기전세주택 공급 확대를 위한 구역 지정을 이어갔다.",
+    keywords: ["건설자재 공급위기", "역세권 활성화", "장기전세주택", "공사비지수"],
+    tags: ["국토부", "서울시", "시장동향"],
+    file: "도시건축관련_주간뉴스레터_2026_4-2.html",
+    sections: [true, true, true, true, false]
+  },
+  {
+    vol: "2026-14",
+    issue: "2026_4-1",
+    date: "2026.04.06",
+    dateSort: 20260406,
+    weekLabel: "2026 · 4월 1주",
+    title: "건축사 대가정상화 로드맵·토허구역 재지정",
+    summary: "대한건축사협회가 건축사법 개정 이후 대가정상화 시행 준비 로드맵을 공식 발표했다. 압구정·여의도·목동·성수 토지거래허가구역이 재지정되며 주요 정비사업지 거래에 제동이 걸렸다.",
+    keywords: ["건축사 대가정상화", "토허구역 재지정", "건축사법 개정", "서울 고층공사비"],
+    tags: ["국토부", "서울시", "정비사업", "시장동향"],
+    file: "도시건축관련_주간뉴스레터_2026_4-1.html",
+    sections: [true, true, true, true, true]
+  },
+  {
+    vol: "2026-13",
+    issue: "2026_3-5",
+    date: "2026.04.05",
+    dateSort: 20260405,
+    weekLabel: "2026 · 3월 5주",
+    title: "토허구역 재지정·4월 분양 반등·대가정상화 로드맵",
+    summary: "압·여·목·성 토허구역 재지정으로 정비사업지 거래가 다시 묶인 가운데 4월 수도권 분양이 전년 대비 2배 수준으로 반등했다. 건축사법 개정에 따른 대가정상화 로드맵도 공식화됐다.",
+    keywords: ["토허구역 재지정", "4월 분양 반등", "대가정상화 로드맵", "고층공사비 30% 급등"],
+    tags: ["국토부", "서울시", "정비사업", "시장동향"],
+    file: "도시건축관련_주간뉴스레터_2026_3-5.html",
+    sections: [true, true, true, true, true]
+  },
+  {
+    vol: "2026-12",
+    issue: "2026_3-4",
+    date: "2026.03.29",
+    dateSort: 20260329,
+    weekLabel: "2026 · 3월 4주",
+    title: "2기 신도시 광역교통 개선·서울 재건축 심의 집중",
+    summary: "국토부가 2기 신도시 광역교통 개선 방안을 발표하며 GTX 연계 계획을 구체화했다. 서울 주요 재건축 단지의 도시계획위원회 심의가 집중되며 정비사업 속도가 올라가고 있다.",
+    keywords: ["2기신도시", "광역교통", "GTX", "재건축 심의"],
+    tags: ["국토부", "서울시", "정비사업"],
+    file: "도시건축관련_주간뉴스레터_2026_3-4.html",
+    sections: [true, true, true, true, false]
+  },
+  {
+    vol: "2026-11",
+    issue: "2026_3-3",
+    date: "2026.03.22",
+    dateSort: 20260322,
+    weekLabel: "2026 · 3월 3주",
+    title: "서울시 용도지역 체계 개편 논의·공공설계공모 확대",
+    summary: "서울시가 비주거용지 비율 확대를 포함한 용도지역 체계 개편 방향을 검토 중이다. 공공건축 설계공모 의무화 확대 방침에 따라 조달청 공모 물량도 증가 추세다.",
+    keywords: ["용도지역 개편", "공공설계공모", "조달청", "비주거 확대"],
+    tags: ["서울시", "공모"],
+    file: "도시건축관련_주간뉴스레터_2026_3-3.html",
+    sections: [true, true, true, false, true]
+  },
+  {
+    vol: "2026-10",
+    issue: "2026_3-2",
+    date: "2026.03.15",
+    dateSort: 20260315,
+    weekLabel: "2026 · 3월 2주",
+    title: "LH 공공주택 공급 계획·강남 지구단위계획 변경",
+    summary: "LH가 올해 공공주택 착공 목표를 발표하며 수도권 물량 집중 계획을 공개했다. 강남구 일대 주요 지구단위계획 변경고시가 연달아 이뤄지며 개발 여건이 변화하고 있다.",
+    keywords: ["LH 공공주택", "수도권 물량", "지구단위계획", "강남 개발"],
+    tags: ["국토부", "서울시", "시장동향"],
+    file: "도시건축관련_주간뉴스레터_2026_3-2.html",
+    sections: [true, true, true, true, false]
+  },
+  {
+    vol: "2026-9",
+    issue: "2026_3-1",
+    date: "2026.03.08",
+    dateSort: 20260308,
+    weekLabel: "2026 · 3월 1주",
+    title: "건축법 시행령 개정·서울 모아타운 1차 공모 결과",
+    summary: "건축법 시행령 일부 개정안이 행정예고됐으며 소규모 공동주택의 특례 기준이 조정된다. 서울시 모아타운 1차 공모 최종 선정 결과가 발표됐다.",
+    keywords: ["건축법 시행령", "모아타운", "소규모공동주택", "행정예고"],
+    tags: ["국토부", "서울시", "정비사업"],
+    file: "도시건축관련_주간뉴스레터_2026_3-1.html",
+    sections: [true, true, true, false, true]
+  },
+  {
+    vol: "2026-8",
+    issue: "2026_2-4",
+    date: "2026.02.22",
+    dateSort: 20260222,
+    weekLabel: "2026 · 2월 4주",
+    title: "건축사법 국회 통과·주택공급 확대 TF 가동",
+    summary: "건축사 업무대가 정상화와 유사명칭 금지를 담은 건축사법 개정안이 국회 본회의를 통과했다. 정부가 주택공급 확대 TF를 구성하며 하반기 공급 일정을 앞당기기 위한 대책 마련에 나섰다.",
+    keywords: ["건축사법 통과", "업무대가 정상화", "주택공급TF", "유사명칭 금지"],
+    tags: ["국토부", "시장동향"],
+    file: "도시건축관련_주간뉴스레터_2026_2-4.html",
+    sections: [true, false, true, true, false]
+  }
 ];
-let filter = "전체"; let query = "";
-function fmt(s){ const [y,m,d] = s.split("."); return `${y}ꅠ${parseInt(m)}월 ${parseInt(d)}일`; }
-function monthKey(s){ const [y,m] = s.split("."); return `${y}ꅠ${parseInt(m)}월`; }
-function matchFilter(n){ if(filter==="전체") return true; return n.tags&&n.tags.includes(filter); }
-function matchQuery(n){ if(!query) return true; const q=query.toLowerCase(); return n.title.toLowerCase().includes(q)||n.summary.toLowerCase().includes(q)||n.keywords.some(k=>k.toLowerCase().includes(q))||n.issue.includes(q); }
-function openLatest(){ if(ISSUES.length) window.open(ISSUES[0].file,"_blank"); }
-function render(){
-  const filtered=ISSUES.filter(n=>matchFilter(n)&&matchQuery(n));
-  document.getElementById("cnt").textContent=`${filtered.length}똰 호`;
-  const groups={}; filtered.forEach(n=>{ const k=monthKey(n.date); if(!groups[k])groups[k]=[]; groups[k].push(n); });
-  const latest=ISSUES[0];
-  document.getElementById("l-issue").textContent=`VOL.${latest.vol} · ${latest.issue} · ${fmt(latest.date)}`;
-  document.getElementById("l-title").textContent=latest.title;
-  document.getElementById("l-kws").innerHTML=latest.keywords.slice(0,5).map(k=>`<span class="latest-kw">${k}</span>`).join("");
-  const main=document.getElementById("main");
-  main.innerHTML=Object.keys(groups).map(m=>`<div class="month-group"><div class="month-label">${m} ‒ ${groups[m].length}개 옸</div><div class="grid">${groups[m].map((n,idx)=>`<a class="card" href="${n.file}" target="_blank" style="animation-delay:${idx*0.05}s"><div class="card-head"><span class="card-vol">VOL.${n.vol}</span><span class="card-date">${fmt(n.date)}</span></div><div class="card-body"><div class="card-week">${n.weekLabel}</div><div class="card-title">${n.title}</div><div class="card-summary">${n.summary}</div><div class="card-kws">${n.keywords.slice(0,4).map(k=>`<span class="card-kw">${k}</span>`).join("")}</div></div><div class="card-foot"><div class="card-dots">${n.sections.map(s=>`<div class="dot${s?" on":""}"></div>`).join("")}</div><span class="card-cta">원문 →</span></div></a>`).join("")}</div></div>`).join("");
+
+// ─────────────────────────────────────────
+//  State
+// ─────────────────────────────────────────
+let filter = "전체";
+let query  = "";
+
+// ─────────────────────────────────────────
+//  Helpers
+// ─────────────────────────────────────────
+function fmt(s){
+  // "2026.04.27" → "2026년 4월 27일"
+  const [y,m,d] = s.split(".");
+  return `${y}년 ${parseInt(m)}월 ${parseInt(d)}일`;
 }
-document.querySelectorAll(".ftag").forEach(b=>b.addEventListener("click",()=>{filter=b.dataset.f;document.querySelectorAll(".ftag").forEach(x=>x.classList.remove("on"));b.classList.add("on");render();}));
-let t; document.getElementById("q").addEventListener("input",e=>{clearTimeout(t);t=setTimeout(()=>{qwery = e.target.value; render();},160);});
+
+function monthKey(s){
+  const [y,m] = s.split(".");
+  return `${y}년 ${parseInt(m)}월`;
+}
+
+function matchFilter(n){
+  if(filter === "전체") return true;
+  return n.tags && n.tags.includes(filter);
+}
+
+function matchQuery(n){
+  if(!query) return true;
+  const q = query.toLowerCase();
+  return (
+    n.title.toLowerCase().includes(q) ||
+    n.summary.toLowerCase().includes(q) ||
+    n.keywords.some(k=>k.toLowerCase().includes(q)) ||
+    n.issue.includes(q)
+  );
+}
+
+function openLatest(){
+  if(ISSUES.length) window.open(ISSUES[0].file,"_blank");
+}
+
+// ─────────────────────────────────────────
+//  Render
+// ─────────────────────────────────────────
+function render(){
+  const filtered = ISSUES.filter(n => matchFilter(n) && matchQuery(n));
+
+  // update count
+  document.getElementById("cnt").textContent = `${filtered.length}개 호`;
+
+  // group by month
+  const groups = {};
+  filtered.forEach(n=>{
+    const k = monthKey(n.date);
+    if(!groups[k]) groups[k] = [];
+    groups[k].push(n);
+  });
+
+  // update latest banner
+  const latest = ISSUES[0];
+  document.getElementById("l-issue").textContent = `VOL.${latest.vol} · ${latest.issue} · ${fmt(latest.date)}`;
+  document.getElementById("l-title").textContent = latest.title;
+  document.getElementById("l-kws").innerHTML = latest.keywords.slice(0,5).map(k=>`<span class="latest-kw">${k}</span>`).join("");
+
+  // render main
+  const main = document.getElementById("main");
+  if(filtered.length === 0){
+    main.innerHTML = `<div class="empty"><div style="font-size:32px">📭</div><p>검색 결과가 없습니다.</p></div>`;
+    return;
+  }
+
+  main.innerHTML = Object.keys(groups).map(m => `
+    <div class="month-group">
+      <div class="month-label">${m} — ${groups[m].length}개 호</div>
+      <div class="grid">
+        ${groups[m].map((n, idx) => `
+          <a class="card" href="${n.file}" target="_blank" style="animation-delay:${idx*0.05}s">
+            <div class="card-head">
+              <span class="card-vol">VOL.${n.vol}</span>
+              <span class="card-date">${fmt(n.date)}</span>
+            </div>
+            <div class="card-body">
+              <div class="card-week">${n.weekLabel}</div>
+              <div class="card-title">${n.title}</div>
+              <div class="card-summary">${n.summary}</div>
+              <div class="card-kws">${n.keywords.slice(0,4).map(k=>`<span class="card-kw">${k}</span>`).join("")}</div>
+            </div>
+            <div class="card-foot">
+              <div class="card-dots">${n.sections.map(s=>`<div class="dot${s?" on":""}"></div>`).join("")}</div>
+              <span class="card-cta">열람 →</span>
+            </div>
+          </a>
+        `).join("")}
+      </div>
+    </div>
+  `).join("");
+}
+
+// ─────────────────────────────────────────
+//  Events
+// ─────────────────────────────────────────
+document.querySelectorAll(".ftag").forEach(b => b.addEventListener("click", () => {
+  filter = b.dataset.f;
+  document.querySelectorAll(".ftag").forEach(x => x.classList.remove("on"));
+  b.classList.add("on");
+  render();
+}));
+
+let t;
+document.getElementById("q").addEventListener("input", e => {
+  clearTimeout(t);
+  t = setTimeout(()=>{ query = e.target.value; render(); }, 160);
+});
+
+// init
 render();
 </script>
 </body>
