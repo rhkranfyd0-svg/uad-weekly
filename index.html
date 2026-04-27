@@ -5,3 +5,233 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>UAD Weekly — 도시건축관련 주간 뉴스레터 아카이브</title>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=Noto+Serif+KR:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --red:    #c0392b;
+  --black:  #111;
+  --ink:    #1a1a1a;
+  --mid:    #555;
+  --muted:  #888;
+  --light:  #f5f4f0;
+  --border: #e8e6e0;
+  --white:  #fff;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{font-size:14px;color:var(--ink);}
+body{background:var(--light);font-family:'Noto Sans KR',sans-serif;min-height:100vh;}
+
+/* ── top nav ── */
+.nav{
+  background:var(--black);
+  padding:0 40px;
+  display:flex;align-items:center;justify-content:space-between;
+  height:52px;position:sticky;top:0;z-index:100;
+  border-bottom:2px solid var(--red);
+}
+.nav-brand{
+  font-family:'Noto Serif KR',serif;
+  font-size:15px;font-weight:700;color:#fff;
+  letter-spacing:0.5px;
+}
+.nav-brand span{color:var(--red);margin-right:8px;}
+.nav-meta{font-size:10px;color:#666;letter-spacing:2px;}
+
+/* ── hero strip ── */
+.hero{
+  background:var(--ink);
+  padding:40px 40px 32px;
+  border-bottom:1px solid #2a2a2a;
+}
+.hero-label{font-size:9px;letter-spacing:4px;color:#555;text-transform:uppercase;margin-bottom:10px;}
+.hero-title{font-family:'Noto Serif KR',serif;font-size:28px;font-weight:700;color:#fff;line-height:1.2;margin-bottom:18px;}
+.hero-title em{color:var(--red);font-style:normal;}
+
+/* ── latest banner ── */
+.latest-banner{
+  background:#1a1a1a;
+  border:1px solid #2a2a2a;
+  border-left:3px solid var(--red);
+  padding:18px 24px;
+  display:flex;align-items:center;gap:20px;
+  cursor:pointer;transition:background .15s;
+}
+.latest-banner:hover{background:#222;}
+.latest-tag{font-size:9px;letter-spacing:3px;color:var(--red);text-transform:uppercase;white-space:nowrap;}
+.latest-issue{font-size:11px;color:#666;margin:3px 0;}
+.latest-headline{font-size:13px;font-weight:700;color:#ddd;}
+.latest-kws{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px;}
+.latest-kw{font-size:9px;background:#2a2a2a;color:#aaa;padding:2px 7px;border-radius:2px;}
+.latest-arrow{margin-left:auto;color:var(--red);font-size:18px;flex-shrink:0;}
+
+/* ── controls ── */
+.controls{
+  background:var(--white);
+  border-bottom:1px solid var(--border);
+  padding:16px 40px;
+  display:flex;align-items:center;gap:12px;flex-wrap:wrap;
+}
+#q{
+  border:1px solid var(--border);background:var(--light);
+  padding:7px 12px;font-size:12px;font-family:inherit;color:var(--ink);
+  outline:none;border-radius:2px;width:200px;
+  transition:border .15s;
+}
+#q:focus{border-color:var(--red);}
+.filters{display:flex;gap:6px;flex-wrap:wrap;}
+.ftag{
+  font-size:10px;padding:4px 10px;border-radius:2px;
+  border:1px solid var(--border);background:var(--white);
+  color:var(--muted);cursor:pointer;transition:all .12s;font-family:inherit;
+}
+.ftag:hover{border-color:var(--red);color:var(--red);}
+.ftag.on{background:var(--red);color:#fff;border-color:var(--red);}
+.count{margin-left:auto;font-size:11px;color:var(--muted);}
+
+/* ── main ── */
+.main{max-width:1100px;margin:0 auto;padding:32px 40px;}
+
+/* ── month group ── */
+.month-group{margin-bottom:36px;}
+.month-label{
+  font-size:11px;font-weight:700;color:var(--red);
+  letter-spacing:2px;text-transform:uppercase;
+  padding-bottom:10px;border-bottom:2px solid var(--red);
+  margin-bottom:18px;
+}
+
+/* ── grid ── */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px;}
+
+/* ── card ── */
+.card{
+  background:var(--white);border:1px solid var(--border);
+  display:flex;flex-direction:column;
+  text-decoration:none;color:var(--ink);
+  transition:border-color .15s, box-shadow .15s;
+  animation:fadeUp .3s ease both;
+}
+.card:hover{border-color:var(--red);box-shadow:0 2px 12px rgba(192,57,43,.08);}
+@keyframes fadeUp{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.card-head{
+  padding:10px 14px 8px;
+  display:flex;align-items:center;justify-content:space-between;
+  border-bottom:1px solid var(--border);
+  background:var(--light);
+}
+.card-vol{font-size:10px;font-weight:700;color:var(--red);letter-spacing:1px;}
+.card-date{font-size:10px;color:var(--muted);}
+.card-body{padding:14px;flex:1;}
+.card-week{font-size:9px;letter-spacing:2px;color:var(--muted);text-transform:uppercase;margin-bottom:5px;}
+.card-title{font-size:13px;font-weight:700;color:var(--ink);line-height:1.5;margin-bottom:7px;}
+.card-summary{font-size:11px;color:var(--mid);line-height:1.7;margin-bottom:10px;}
+.card-kws{display:flex;gap:4px;flex-wrap:wrap;}
+.card-kw{font-size:9px;background:var(--light);color:var(--muted);padding:2px 6px;border-radius:2px;}
+.card-foot{
+  padding:10px 14px;
+  border-top:1px solid var(--border);
+  display:flex;align-items:center;justify-content:space-between;
+}
+.card-dots{display:flex;gap:3px;}
+.dot{width:6px;height:6px;border-radius:50%;background:var(--border);}
+.dot.on{background:var(--red);}
+.card-cta{font-size:10px;color:var(--red);font-weight:700;letter-spacing:1px;}
+
+/* ── empty ── */
+.empty{text-align:center;padding:60px 20px;color:var(--muted);}
+.empty p{font-size:13px;margin-top:8px;}
+
+/* ── footer ── */
+.footer{
+  background:var(--black);padding:24px 40px;
+  color:#555;font-size:11px;
+  display:flex;justify-content:space-between;align-items:center;
+  border-top:2px solid var(--red);
+}
+.footer-brand{font-family:'Noto Serif KR',serif;color:#888;font-size:12px;}
+
+@media(max-width:640px){
+  .nav,.controls,.main,.footer,.hero{padding-left:16px;padding-right:16px;}
+  .grid{grid-template-columns:1fr;}
+  .hero-title{font-size:20px;}
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-brand"><span>UAD</span>Weekly Letter Archive</div>
+  <div class="nav-meta">도시건축관련 주간 뉴스레터</div>
+</nav>
+
+<!-- 최신호 배너 (JS가 채움) -->
+<div class="hero" id="hero">
+  <div class="hero-label">Urban Architecture Design · Weekly Letter</div>
+  <div class="hero-title">도시건축관련<br><em>주간 뉴스레터</em> 아카이브</div>
+  <div id="latest-banner" class="latest-banner" onclick="openLatest()">
+    <div>
+      <div class="latest-tag">Latest Issue</div>
+      <div class="latest-issue" id="l-issue"></div>
+      <div class="latest-headline" id="l-title"></div>
+      <div class="latest-kws" id="l-kws"></div>
+    </div>
+    <div class="latest-arrow">→</div>
+  </div>
+</div>
+
+<!-- 검색·필터 -->
+<div class="controls">
+  <input id="q" placeholder="🔍  키워드·제목 검색…">
+  <div class="filters">
+    <button class="ftag on" data-f="전체">전체</button>
+    <button class="ftag" data-f="국토부">국토부</button>
+    <button class="ftag" data-f="서울시">서울시</button>
+    <button class="ftag" data-f="정비사업">정비사업</button>
+    <button class="ftag" data-f="공모">공모</button>
+    <button class="ftag" data-f="시장동향">시장동향</button>
+  </div>
+  <div class="count" id="cnt"></div>
+</div>
+
+<div class="main" id="main"></div>
+
+<div class="footer">
+  <div class="footer-brand">UAD Weekly Letter · 도시건축관련 주간 뉴스레터</div>
+  <div>건축·도시계획 실무자를 위한 큐레이션 브리핑</div>
+</div>
+
+<script>
+const ISSUES = [
+  { vol: "2026-17", issue: "2026_4-4", date: "2026.04.27", dateSort: 20260427, weekLabel: "2026 · 4월 4주", title: "건설자재 수급 위기·신통기획 대규모 가결", summary: "중동전쟁 장기화로 아스콘·단열재 등 주요 자재 가격이 급등하며 5월 공사 중단 우려가 현실화됐다.", keywords: ["건설자재 수급위기", "신통기획", "역세권 활성화", "영동대로 지하도시", "법령 행정예고"], tags: ["국토부", "서울시", "정비사업", "시장동향"], file: "도시건축관련_주간뉴스레터_2026_4-4.html", sections: [true,true,true,true,true] },
+  { vol: "2026-16", issue: "2026_4-3", date: "2026.04.20", dateSort: 20260420, weekLabel: "2026 · 4월 3주", title: "건설사 특별융자 6천억·서울 고층공사비 급등", summary: "국토부: 중동발 건설위기 대응으로 건설사 특별융자 6,000억원 ", keywords: ["건설특별융자", "고층공사비", "신반포2차", "정비사업", "설계공모"], tags: ["국토부", "서울시", "정비사업", "시장동향"], file: "도시건축관련_주간뉴스레터_2026_4-3.html", sections: [true,true,true,true,true] },
+  { vol: "2026-15", issue: "2026_4-2", date: "2026.04.13", dateSort: 20260413, weekLabel: "2026 · 4월 2주", title: "중동발 건설자재 위기·서울 역세권 개발 가속", summary: "중폙전쟁 ҥ건설팔트·레미콘 원자재", keywords: ["건설자재", "쉭세권", "장기전세주택"], tags: ["국토부", "서울시", "시장동향"], file: "도시건축관련_주간뉴스레터_2026_4-2.html", sections: [true,true,true,true,false] },
+  { vol: "2026-14", issue: "2026_4-1", date: "2026.04.06", dateSort: 20260406, weekLabel: "2026 · 4월 1주", title: "건축법 개정 이후대� 정상화 로드맵", summary: "대한건축사협회 가올해 로드맵을 공식", keywords: ["건축사", "토허구역"], tags: ["국토부", "서울시", "정비사업", "시장동향"], file: "도시건축관련_주간뉴스레터_2026_4-1.html", sections: [true,true,true,true,true] },
+  { vol: "2026-13", issue: "2026_3-5", date: "2026.04.05", dateSort: 20260405, weekLabel: "2026 · 3월 5주", title: "토허구역 재지정�3�청 4월 톄양", summary: "압·여·목·성 토허구역 재지정 4월 ", keywords: ["토허구역", "4월 분양"], tags: ["국토부", "서울시", "정비사업", "시장동향"], file: "도시건축관련_주간뉴스레터_2026_3-5.html", sections: [true,true,true,true,true] },
+  { vol: "2026-12", issue: "2026_3-4", date: "2026.03.29", dateSort: 20260329, weekLabel: "2026 · 3월 4주", title: "2기 Ӻ자도시 공가선", summary: "국토부가 2기 GTX �L�재건축", keywords: ["2기신도시", "GTX"], tags: ["국토부", "서울시", "정비사업"], file: "도시건축관련_주간뉴스레터_2026_3-4.html", sections: [true,true,true,true,false] },
+  { vol: "2026-11", issue: "2026_3-3", date: "2026.03.22", dateSort: 20260322, weekLabel: "2026 · 3월 3주", title: "서울시 용도지역 체계 개편", summary: "서울시가 모공", keywords: ["용도지역"], tags: ["서울시"], file: "도시건축관련_주간뉴스레터_2026_3-3.html", sections: [true,true,true,false,true] },
+  { vol: "2026-10", issue: "2026_3-2", date: "2026.03.15", dateSort: 20260315, weekLabel: "2026 · 3월 2주", title: "LH 공곴주택 공급 계획", summary: "LH ��ᓙ", keywords: ["LH 공공주택"], tags: ["국토부", "서울시", "시장동향"], file: "도시건축관련_주간뉴스레터_2026_3-2.html", sections: [true,true,true,true,false] },
+  { vol: "2026-9", issue: "2026_3-1", date: "2026.03.08", dateSort: 20260308, weekLabel: "2026 · 3월 1주", title: "건축첕 시행령개정", summary: "건축첕 건축 1주", keywords: ["건축첕"], tags: ["국토부", "서울시", "정비사업"], file: "도시건축관련_주간뉴스레터_2026_3-1.html", sections: [true,true,true,false,true] },
+  { vol: "2026-8", issue: "2026_2-4", date: "2026.02.22", dateSort: 20260222, weekLabel: "2026 · 2월 4주", title: "건축사첕 국회 통과", summary: "건축사 TF", keywords: ["건축사법"], tags: ["국토부", "시장동향"], file: "도시건축관련_주간뉴스레터_2026_2-4.html", sections: [true,false,true,true,false] }
+];
+let filter = "전체"; let query = "";
+function fmt(s){ const [y,m,d] = s.split("."); return `${y}ꅠ${parseInt(m)}월 ${parseInt(d)}일`; }
+function monthKey(s){ const [y,m] = s.split("."); return `${y}ꅠ${parseInt(m)}월`; }
+function matchFilter(n){ if(filter==="전체") return true; return n.tags&&n.tags.includes(filter); }
+function matchQuery(n){ if(!query) return true; const q=query.toLowerCase(); return n.title.toLowerCase().includes(q)||n.summary.toLowerCase().includes(q)||n.keywords.some(k=>k.toLowerCase().includes(q))||n.issue.includes(q); }
+function openLatest(){ if(ISSUES.length) window.open(ISSUES[0].file,"_blank"); }
+function render(){
+  const filtered=ISSUES.filter(n=>matchFilter(n)&&matchQuery(n));
+  document.getElementById("cnt").textContent=`${filtered.length}똰 호`;
+  const groups={}; filtered.forEach(n=>{ const k=monthKey(n.date); if(!groups[k])groups[k]=[]; groups[k].push(n); });
+  const latest=ISSUES[0];
+  document.getElementById("l-issue").textContent=`VOL.${latest.vol} · ${latest.issue} · ${fmt(latest.date)}`;
+  document.getElementById("l-title").textContent=latest.title;
+  document.getElementById("l-kws").innerHTML=latest.keywords.slice(0,5).map(k=>`<span class="latest-kw">${k}</span>`).join("");
+  const main=document.getElementById("main");
+  main.innerHTML=Object.keys(groups).map(m=>`<div class="month-group"><div class="month-label">${m} ‒ ${groups[m].length}개 옸</div><div class="grid">${groups[m].map((n,idx)=>`<a class="card" href="${n.file}" target="_blank" style="animation-delay:${idx*0.05}s"><div class="card-head"><span class="card-vol">VOL.${n.vol}</span><span class="card-date">${fmt(n.date)}</span></div><div class="card-body"><div class="card-week">${n.weekLabel}</div><div class="card-title">${n.title}</div><div class="card-summary">${n.summary}</div><div class="card-kws">${n.keywords.slice(0,4).map(k=>`<span class="card-kw">${k}</span>`).join("")}</div></div><div class="card-foot"><div class="card-dots">${n.sections.map(s=>`<div class="dot${s?" on":""}"></div>`).join("")}</div><span class="card-cta">원문 →</span></div></a>`).join("")}</div></div>`).join("");
+}
+document.querySelectorAll(".ftag").forEach(b=>b.addEventListener("click",()=>{filter=b.dataset.f;document.querySelectorAll(".ftag").forEach(x=>x.classList.remove("on"));b.classList.add("on");render();}));
+let t; document.getElementById("q").addEventListener("input",e=>{clearTimeout(t);t=setTimeout(()=>{qwery = e.target.value; render();},160);});
+render();
+</script>
+</body>
+</html>
